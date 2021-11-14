@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { connect } from "react-redux";
-import { userApi } from "utils/api";
+import { userApi, dialogsApi } from "utils/api";
 
 import { Sidebar } from "components";
 
@@ -33,6 +33,18 @@ const SidebarContainer = ({ user }) => {
       });
   };
 
+  const onAddDialog = () => {
+    dialogsApi
+      .create({
+        partner: selectedUserId,
+        text: messageText
+      })
+      .then(onClose)
+      .catch(() => {
+        setIsLoading(false);
+      });
+  };
+
   const handleChangeInput = value => {
     setInputValue(value);
   };
@@ -56,6 +68,7 @@ const SidebarContainer = ({ user }) => {
       onSearch={onSearch}
       onChangeInput={handleChangeInput}
       onSelectUser={onSelectUser}
+      onModalOk={onAddDialog}
       onChangeTextArea={onChangeTextArea}
       messageText={messageText}
       selectedUserId={selectedUserId}

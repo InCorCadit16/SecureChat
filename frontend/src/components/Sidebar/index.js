@@ -1,5 +1,6 @@
 import React from 'react';
 import { Icon, Button, Modal, Select, Input, Form } from 'antd';
+import { Dialogs } from 'containers';
 
 import './Sidebar.scss';
 
@@ -35,6 +36,7 @@ const Sidebar = ({
       </div>
 
       <div className="chat__sidebar-dialogs">
+        <Dialogs userId={user && user._id} />
       </div>
       <Modal
         title="Создать диалог"

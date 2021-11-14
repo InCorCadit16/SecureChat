@@ -7,11 +7,14 @@ import { UserModel } from "../models";
 import { IUser } from "../models/User";
 import { createJWToken } from "../utils";
 import { SentMessageInfo } from "nodemailer/lib/sendmail-transport";
+import SocketIO from "socket.io";
 
 
 class UserController {
+  io: SocketIO.Server;
 
-  constructor() {
+  constructor(io: SocketIO.Server) {
+    this.io = io;
   }
 
   show = (req: express.Request, res: express.Response): void => {
