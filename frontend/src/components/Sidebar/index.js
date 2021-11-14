@@ -1,6 +1,7 @@
 import React from 'react';
 import { Icon, Button, Modal, Select, Input, Form } from 'antd';
 import { Dialogs } from 'containers';
+import { Popover } from 'antd';
 
 import './Sidebar.scss';
 
@@ -16,6 +17,7 @@ const Sidebar = ({
   isLoading,
   users,
   onShow,
+  onLogOut,
   onClose,
   onSearch,
   onChangeInput,
@@ -27,13 +29,30 @@ const Sidebar = ({
 
   return (
     <div className="chat__sidebar">
+     
       <div className="chat__sidebar-header">
         <div>
           <Icon type="team" />
           <span>Список диалогов</span>
         </div>
-        <Button onClick={onShow} type="link" shape="circle" icon="form" />
+        
+          <Popover
+            className="chat__sidebar-header-action"
+            content={
+              <div className="chat__sidebar-header-action-popup">
+                <Button onClick={onShow}>New chat</Button>
+                <Button onClick={onLogOut}>Log out</Button>
+              </div>
+            }
+            trigger="hover">
+            <div>
+              <Button type="link" shape="circle" icon="ellipsis" />
+            </div>
+          </Popover>
+        
       </div>
+
+      
 
       <div className="chat__sidebar-dialogs">
         <Dialogs userId={user && user._id} />

@@ -20,6 +20,11 @@ const SidebarContainer = ({ user }) => {
     setVisible(true);
   };
 
+  const onLogOut = () => {
+    localStorage.removeItem('token');
+    document.location.replace("/signin")
+  }
+
   const onSearch = value => {
     setIsLoading(true);
     userApi
@@ -65,6 +70,7 @@ const SidebarContainer = ({ user }) => {
       isLoading={isLoading}
       onClose={onClose}
       onShow={onShow}
+      onLogOut={onLogOut}
       onSearch={onSearch}
       onChangeInput={handleChangeInput}
       onSelectUser={onSelectUser}

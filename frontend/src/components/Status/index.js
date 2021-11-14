@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import { Button, Popover } from 'antd';
 
+
 import './Status.scss';
 
 const Status = ({ online, fullname }) => (
@@ -16,6 +17,7 @@ const Status = ({ online, fullname }) => (
         </span>
       </div>
     </div>
+    
     <Popover
       className="chat__dialog-header-action"
       content={
@@ -23,7 +25,7 @@ const Status = ({ online, fullname }) => (
           <Button>Удалить диалог</Button>
         </div>
       }
-      trigger="click">
+      trigger="hover">
       <div>
         <Button type="link" shape="circle" icon="ellipsis" />
       </div>

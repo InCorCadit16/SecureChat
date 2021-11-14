@@ -30,6 +30,16 @@
           margin-right: 5px;
         }
       }
+
+      &-action {
+        transform: rotate(90deg);
+
+        &-popup {
+          display: flex;
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
     }
 
     &-dialogs {
