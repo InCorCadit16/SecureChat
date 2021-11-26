@@ -1,4 +1,5 @@
 import { messagesApi } from "utils/api";
+import { aes } from 'utils/helpers';
 
 const Actions = {
   setMessages: items => ({
@@ -42,8 +43,8 @@ const Actions = {
     dispatch(Actions.setIsLoading(true));
     messagesApi
       .getAllByDialogId(dialogId)
-      .then(({ data }) => {
-        dispatch(Actions.setMessages(data));
+      .then(({data}) => {
+        dispatch(Actions.setMessages(data.messages.map(m => aes.decrypt(m, data.partner.publicECDHKey))));
       })
       .catch(() => {
         dispatch(Actions.setIsLoading(false));

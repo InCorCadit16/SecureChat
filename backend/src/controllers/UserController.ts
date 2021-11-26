@@ -5,7 +5,7 @@ import mailer from "../core/mailer";
 
 import { UserModel } from "../models";
 import { IUser } from "../models/User";
-import { createJWToken } from "../utils";
+import { createJWToken, aes } from "../utils";
 import { SentMessageInfo } from "nodemailer/lib/sendmail-transport";
 import SocketIO from "socket.io";
 
@@ -79,10 +79,17 @@ class UserController {
   };
 
   create = (req: express.Request, res: express.Response): void => {
-    const postData: { email: string; fullname: string; password: string } = {
+    const postData: { 
+      email: string;
+      fullname: string;
+      password: string,
+      publicECDHKey: string,
+      privateECDHKey: string
+    } = {
       email: req.body.email,
       fullname: req.body.fullname,
       password: req.body.password,
+      ...aes.createKeys()
     };
 
     const errors = validationResult(req);

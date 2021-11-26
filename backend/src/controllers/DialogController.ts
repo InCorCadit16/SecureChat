@@ -2,7 +2,10 @@ import express from 'express';
 import socket from 'socket.io';
 import DialogModel from '../models/Dialog';
 import MessageModel from '../models/Message';
+import UserModel, { IUser } from '../models/User';
+import { aes } from '../utils';
 
+const ObjectId = require('mongodb').ObjectId;
 
 class DialogController {
   io: socket.Server;
@@ -29,6 +32,11 @@ class DialogController {
             message: 'Dialogs not found',
           });
         }
+
+        for (let dialog of dialogs) {
+          (dialog.author as IUser).privateECDHKey = undefined;
+          (dialog.partner as IUser).privateECDHKey = undefined;
+        }
         return res.json(dialogs);
       });
   };
@@ -38,6 +46,8 @@ class DialogController {
       author: req.user._id,
       partner: req.body.partner,
     };
+
+
 
     DialogModel.findOne(
       {
@@ -59,29 +69,59 @@ class DialogController {
         } else {
           const dialog = new DialogModel(postData);
 
+          const ids = [new ObjectId(req.user._id), new ObjectId(req.body.partner)]
+
           dialog
             .save()
             .then((dialogObj) => {
-              const message = new MessageModel({
-                text: req.body.text,
-                user: req.user._id,
-                dialog: dialogObj._id,
-              });
+              UserModel.find({_id: {$in: ids}},
+                (err, users) => {
+                  if (err) {
+                    return res.status(500).json({
+                      status: 'error', 
+                      message: err,
+                    })
+                  }
+                  if (users.length !== 2) {
+                    if (err) {
+                      return res.status(403).json({
+                        status: 'error',
+                        message: 'Failed to create dialog between these users'
+                      })
+                    }
+                  } else {
+                    const author: IUser = users.find(u => u.id === req.user._id) as IUser;
+                    const partner: IUser = users.find(u => u.id === req.body.partner) as IUser;
+                    const encryptedText: string = aes.encryptMessage(req.body.text, author, partner.publicECDHKey);
 
-              message
-                .save()
-                .then(() => {
-                  dialogObj.lastMessage = message._id;
-                  dialogObj.save().then(() => {
-                    res.json(dialogObj);
-                    this.io.emit('SERVER:DIALOG_CREATED', {
-                      ...postData,
-                      dialog: dialogObj,
+                    const message = new MessageModel({
+                      text: encryptedText,
+                      user: req.user._id,
+                      dialog: dialogObj._id,
                     });
-                  });
+      
+                    message
+                      .save()
+                      .then(() => {
+                        dialogObj.lastMessage = message._id;
+                        dialogObj.save().then(() => {
+                          res.json(dialogObj);
+                          this.io.emit('SERVER:DIALOG_CREATED', {
+                            ...postData,
+                            dialog: dialogObj,
+                          });
+                        });
+                      })
+                      .catch((reason) => {
+                        res.json(reason);
+                      });
+                  }
                 })
-                .catch((reason) => {
-                  res.json(reason);
+                .catch((err) => {
+                  res.json({
+                    status: 'error',
+                    message: err,
+                  });
                 });
             })
             .catch((err) => {

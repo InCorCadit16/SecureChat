@@ -7,6 +7,7 @@ export interface IDialog extends Document {
   author: IUser | string;
   messages: IMessage[];
   lastMessage: IMessage | string;
+  publicKeys: string[];
 }
 
 const DialogSchema = new Schema(

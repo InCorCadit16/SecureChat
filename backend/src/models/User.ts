@@ -12,6 +12,8 @@ export interface IUser extends Document {
   confirm_hash: string;
   last_seen: Date;
   data?: IUser;
+  publicECDHKey: string;
+  privateECDHKey?: string;
 }
 
 const UserSchema: Schema = new Schema(
@@ -33,6 +35,14 @@ const UserSchema: Schema = new Schema(
     confirmed: {
       type: Boolean,
       default: false,
+    },
+    publicECDHKey: {
+      type: String,
+      required: "Public ECDH Key is required"
+    },
+    privateECDHKey: {
+      type: String,
+      required: "Private ECDH Key is required"
     },
     avatar: String,
     confirm_hash: String,

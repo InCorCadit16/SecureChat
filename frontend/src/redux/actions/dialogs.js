@@ -1,5 +1,7 @@
-import { dialogsApi } from 'utils/api';
 import socket from 'core/socket';
+
+import { dialogsApi } from 'utils/api';
+import { aes } from 'utils/helpers';
 
 const Actions = {
   setDialogs: items => ({
@@ -22,7 +24,10 @@ const Actions = {
   },
   fetchDialogs: () => dispatch => {
     dialogsApi.getAll().then(({ data }) => {
-      dispatch(Actions.setDialogs(data));
+      dispatch(Actions.setDialogs(data.map(d => {
+        d.lastMessage = aes.decrypt(d.lastMessage, d.partner.publicECDHKey);
+        return d;
+      })));
     });
   },
 };

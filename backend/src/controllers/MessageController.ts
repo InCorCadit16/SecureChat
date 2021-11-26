@@ -2,7 +2,9 @@ import express from "express";
 import socket from "socket.io";
 
 import { MessageModel, DialogModel } from "../models";
+import { IDialog } from "../models/Dialog";
 import { IMessage } from "../models/Message";
+import { IUser } from "../models/User";
 
 class MessageController {
   io: socket.Server;
@@ -42,7 +44,11 @@ class MessageController {
     this.updateReadStatus(res, userId, dialogId);
 
     MessageModel.find({ dialog: dialogId })
-      .populate(["dialog", "user", "attachments"])
+    .populate(["user", "attachments"])
+      .populate({
+        path: 'dialog',
+        populate: ['author', 'partner']
+      })
       .exec(function (err, messages) {
         if (err) {
           return res.status(404).json({
@@ -50,7 +56,13 @@ class MessageController {
             message: "Messages not found",
           });
         }
-        res.json(messages);
+
+        const author = (messages[0].dialog as IDialog).author as IUser;
+        let partner = (messages[0].dialog as IDialog).partner;
+
+        partner = author.id === req.user._id ? partner : author;
+
+        res.json({messages, partner});
       });
   };
 
