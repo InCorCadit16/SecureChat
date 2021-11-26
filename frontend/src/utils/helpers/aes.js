@@ -26,7 +26,7 @@ export default {
         return message;
     },
 
-    encrypt: (message, partnerPK) => {
+    encrypt: (text, partnerPK) => {
         let token = localStorage.getItem('token').split('.')[1];
         const stringToken = Buffer.from(token, 'base64');
         token = JSON.parse(stringToken);
@@ -40,7 +40,7 @@ export default {
         let IV = crypto.randomBytes(16);
         const cipher = crypto.createCipheriv('aes-256-gcm', Buffer.from(sharedKey, 'hex'), IV);
 
-        let encrypted = cipher.update(message.text, 'utf8', 'hex');
+        let encrypted = cipher.update(text, 'utf8', 'hex');
         encrypted += cipher.final('hex');
 
         const authTag = cipher.getAuthTag().toString('hex');
@@ -48,7 +48,19 @@ export default {
         let payload = IV.toString('hex') + encrypted + authTag;
         payload = Buffer.from(payload, 'hex').toString('base64')
 
-        message.text = payload;
-        return message;
+        return payload;
+    },
+
+    getPartner: (dialog) => {
+        let token = localStorage.getItem('token').split('.')[1];
+        const stringToken = Buffer.from(token, 'base64');
+        token = JSON.parse(stringToken);
+        const publicKey = token.data._doc.publicECDHKey;
+
+        if (!dialog) {
+            return null;
+        }
+
+        return dialog.author.publicECDHKey === publicKey ? dialog.partner : dialog  .author;
     }
 } 

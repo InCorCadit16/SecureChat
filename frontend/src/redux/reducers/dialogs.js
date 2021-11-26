@@ -2,6 +2,7 @@ const initialState = {
   items: [],
   currentDialogId: window.location.pathname.split('dialog/')[1],
   isLoading: false,
+  partner: null
 };
 
 export default (state = initialState, { type, payload }) => {

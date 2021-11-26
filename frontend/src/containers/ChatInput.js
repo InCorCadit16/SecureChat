@@ -98,6 +98,7 @@ const ChatInput = props => {
         text: value,
         dialogId: currentDialogId,
         attachments: attachments.map(file => file.uid),
+        partnerKey: props.dialogs.items.find(d => d._id === currentDialogId).oppositeKey
       });
       setValue('');
       setAttachments([]);

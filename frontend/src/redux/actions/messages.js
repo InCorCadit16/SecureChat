@@ -17,8 +17,8 @@ const Actions = {
       });
     }
   },
-  fetchSendMessage: ({ text, dialogId, attachments }) => dispatch => {
-    return messagesApi.send(text, dialogId, attachments);
+  fetchSendMessage: ({ text, dialogId, attachments, partnerKey }) => dispatch => {
+    return messagesApi.send(aes.encrypt(text, partnerKey), dialogId, attachments);
   },
   setIsLoading: bool => ({
     type: "MESSAGES:SET_IS_LOADING",

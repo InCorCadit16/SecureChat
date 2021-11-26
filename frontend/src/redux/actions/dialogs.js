@@ -4,9 +4,10 @@ import { dialogsApi } from 'utils/api';
 import { aes } from 'utils/helpers';
 
 const Actions = {
-  setDialogs: items => ({
+  setDialogs: ({items, partner}) => ({
     type: 'DIALOGS:SET_ITEMS',
     payload: items,
+    partner
   }),
   updateReadedStatus: ({ userId, dialogId }) => ({
     type: 'DIALOGS:LAST_MESSAGE_READED_STATUS',
@@ -24,10 +25,14 @@ const Actions = {
   },
   fetchDialogs: () => dispatch => {
     dialogsApi.getAll().then(({ data }) => {
-      dispatch(Actions.setDialogs(data.map(d => {
-        d.lastMessage = aes.decrypt(d.lastMessage, d.partner.publicECDHKey);
-        return d;
-      })));
+      dispatch(Actions.setDialogs({
+        items: data.map(d => {
+          const partnerKey = aes.getPartner(d).publicECDHKey
+          d.oppositeKey = partnerKey;
+          d.lastMessage = aes.decrypt(d.lastMessage, partnerKey);
+          return d;
+        }),
+      }));
     });
   },
 };
