@@ -107,8 +107,8 @@ class UserController {
             {
               from: "admin@test.com",
               to: postData.email,
-              subject: "Подтверждение почты React Chat Tutorial",
-              html: `Для того, чтобы подтвердить почту, перейдите <a href="http://localhost:3000/signup/verify?hash=${obj.confirm_hash}">по этой ссылке</a>`,
+              subject: "Confirm email in secure chat",
+              html: `In order to confirm your email access <a href="http://localhost:3000/signup/verify?hash=${obj.confirm_hash}">this link</a>`,
             },
             function (err: Error | null, info: SentMessageInfo) {
               if (err) {
@@ -153,7 +153,7 @@ class UserController {
 
           res.json({
             status: "success",
-            message: "Аккаунт успешно подтвержден!",
+            message: "Account successfully verified!",
           });
         });
       });

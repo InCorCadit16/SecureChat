@@ -62,7 +62,7 @@ const ChatInput = props => {
               onChange={e => setValue(e.target.value)}
               onKeyUp={handleSendMessage}
               size="large"
-              placeholder="Введите текст сообщения…"
+              placeholder="Enter message…"
               value={value}
               autosize={{ minRows: 1, maxRows: 6 }}
             />

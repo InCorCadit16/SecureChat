@@ -24,7 +24,7 @@ const Messages = ({
     <div className="chat__dialog-messages" style={{ height: `calc(100% - ${blockHeight}px)` }}>
       <div ref={blockRef} className={classNames('messages', { 'messages--loading': isLoading })}>
         {isLoading && !user ? (
-          <Spin size="large" tip="Загрузка сообщений..." />
+          <Spin size="large" tip="Loading messages..." />
         ) : items && !isLoading ? (
           items.length > 0 ? (
             items.map(item => (
@@ -37,10 +37,10 @@ const Messages = ({
               />
             ))
           ) : (
-            <Empty description="Диалог пуст" />
+            <Empty description="Chat is empty" />
           )
         ) : (
-          <Empty description="Откройте диалог" />
+          <Empty description="Open chat" />
         )}
         {isTyping && <Message isTyping={true} user={partner} />}
         <Modal visible={!!previewImage} onCancel={() => setPreviewImage(null)} footer={null}>

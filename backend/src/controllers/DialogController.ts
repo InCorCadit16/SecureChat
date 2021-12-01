@@ -64,7 +64,7 @@ class DialogController {
         if (dialog) {
           return res.status(403).json({
             status: 'error',
-            message: 'Такой диалог уже есть',
+            message: 'Suhc chat already exisits',
           });
         } else {
           const dialog = new DialogModel(postData);

@@ -19,8 +19,8 @@ const LoginForm = props => {
   return (
     <div>
       <div className="auth__top">
-        <h2>Войти в аккаунт</h2>
-        <p>Пожалуйста, войдите в свой аккаунт</p>
+        <h2>Log in</h2>
+        <p>Please, log in into your account</p>
       </div>
       <Block>
         <Form onSubmit={handleSubmit} className="login-form">
@@ -33,7 +33,7 @@ const LoginForm = props => {
               id="email"
               prefix={<Icon type="mail" style={{ color: "rgba(0,0,0,.25)" }} />}
               size="large"
-              placeholder="E-Mail"
+              placeholder="Email"
               value={values.email}
               onChange={handleChange}
               onBlur={handleBlur}
@@ -49,25 +49,25 @@ const LoginForm = props => {
               prefix={<Icon type="lock" style={{ color: "rgba(0,0,0,.25)" }} />}
               size="large"
               type="password"
-              placeholder="Пароль"
+              placeholder="Password"
               value={values.password}
               onChange={handleChange}
               onBlur={handleBlur}
             />
           </Form.Item>
           <Form.Item>
-            {isSubmitting && !isValid && <span>Ошибка!</span>}
+            {isSubmitting && !isValid && <span>Error!</span>}
             <Button
               disabled={isSubmitting}
               onClick={handleSubmit}
               type="primary"
               size="large"
             >
-              Войти в аккаунт
+              Sign in
             </Button>
           </Form.Item>
           <Link className="auth__register-link" to="/signup">
-            Зарегистрироваться
+            Sign up
           </Link>
         </Form>
       </Block>

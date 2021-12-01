@@ -148,7 +148,7 @@
     },
     {
       "_id": "35ce83ca83f2ba0b7649c43cb",
-      "text": "Привет! 😃",
+      "text": "Hi! 😃",
       "created_at": "Mon Jun 08 1992 04:57:55 GMT+0000 (UTC)",
       "user": {
         "_id": "35ce83ca8f41ffe5a11c0b72c",
@@ -159,7 +159,7 @@
     },
     {
       "_id": "35ce83ca89d0fdae4548a8a8c",
-      "text": "Ау, ты где? 😒",
+      "text": "Where are you? 😒",
       "created_at": "Tue Oct 27 2009 08:28:44 GMT+0000 (UTC)",
       "user": {
         "_id": "15ce83ca8038d9699c179048e",

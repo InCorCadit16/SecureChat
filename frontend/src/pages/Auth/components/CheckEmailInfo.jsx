@@ -9,21 +9,21 @@ const renderTextInfo = ({ hash, verified }) => {
     if (verified) {
       return {
         status: 'success',
-        title: 'Готово!',
-        message: 'Аккаунт успешно подтвержден!',
+        title: 'Success!',
+        message: 'Account successfully verified!',
       };
     } else {
       return {
         status: 'error',
-        title: 'Ошибка',
-        message: 'Вы указали несуществующий или неверный хеш.',
+        title: 'Error',
+        message: 'You stated wrong hash.',
       };
     }
   } else {
     return {
       status: 'info',
-      title: 'Подтвердите почту',
-      message: 'Ссылка с подтверждением аккаунта отправлена на E-Mail.',
+      title: 'Check your email',
+      message: 'Link with account verification was sent to your email.',
     };
   }
 };
@@ -67,7 +67,7 @@ const CheckEmailInfo = ({ location, history }) => {
               info.status === 'success' &&
               verified && (
                 <Button type="primary" onClick={() => history.push('/signin')}>
-                  Войти
+                  Sign in
                 </Button>
               )
             }

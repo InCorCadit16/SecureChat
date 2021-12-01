@@ -20,8 +20,8 @@ const RegisterForm = props => {
   return (
     <div>
       <div className="auth__top">
-        <h2>Регистрация</h2>
-        <p>Для входа в чат, вам нужно зарегистрироваться</p>
+        <h2>Sign up</h2>
+        <p>You need to sign up in order to access secure chat</p>
       </div>
       <Block>
         {!success ? (
@@ -29,7 +29,7 @@ const RegisterForm = props => {
             <FormField
               name="email"
               icon="mail"
-              placeholder="E-Mail"
+              placeholder="Email"
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched}
@@ -40,7 +40,7 @@ const RegisterForm = props => {
             <FormField
               name="fullname"
               icon="user"
-              placeholder="Ваше имя и фамилия"
+              placeholder="Full name"
               handleChange={handleChange}
               handleBlur={handleBlur}
               touched={touched}
@@ -51,7 +51,7 @@ const RegisterForm = props => {
             <FormField
               name="password"
               icon="lock"
-              placeholder="Пароль"
+              placeholder="Password"
               type="password"
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -63,7 +63,7 @@ const RegisterForm = props => {
             <FormField
               name="password_2"
               icon="lock"
-              placeholder="Повторите пароль"
+              placeholder="Confirm password"
               type="password"
               handleChange={handleChange}
               handleBlur={handleBlur}
@@ -73,18 +73,18 @@ const RegisterForm = props => {
             />
 
             <Form.Item>
-              {isSubmitting && !isValid && <span>Ошибка!</span>}
+              {isSubmitting && !isValid && <span>Error!</span>}
               <Button
                 disabled={isSubmitting}
                 onClick={handleSubmit}
                 type="primary"
                 size="large"
               >
-                Зарегистрироваться
+                Sign up
               </Button>
             </Form.Item>
             <Link className="auth__register-link" to="/signin">
-              Войти в аккаунт
+              Sign in
             </Link>
           </Form>
         ) : (
@@ -92,10 +92,9 @@ const RegisterForm = props => {
             <div>
               <Icon type="info-circle" theme="twoTone" />
             </div>
-            <h2>Подтвердите свой аккаунт</h2>
+            <h2>Confirm your account</h2>
             <p>
-              На Вашу почту отправлено письмо с ссылкой на подтверждение
-              аккаунта.
+              A confirmation link was sent to your email.
             </p>
           </div>
         )}

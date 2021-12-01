@@ -33,7 +33,7 @@ const Sidebar = ({
       <div className="chat__sidebar-header">
         <div>
           <Icon type="team" />
-          <span>Список диалогов</span>
+          <span>Chats</span>
         </div>
         
           <Popover
@@ -58,12 +58,12 @@ const Sidebar = ({
         <Dialogs userId={user && user._id} />
       </div>
       <Modal
-        title="Создать диалог"
+        title="Create chat"
         visible={visible}
         onCancel={onClose}
         footer={[
           <Button key="back" onClick={onClose}>
-            Закрыть
+            Close
           </Button>,
           <Button
             disabled={!messageText}
@@ -71,11 +71,11 @@ const Sidebar = ({
             type="primary"
             loading={isLoading}
             onClick={onModalOk}>
-            Создать
+            Create
           </Button>,
         ]}>
         <Form className="add-dialog-form">
-          <Form.Item label="Введите имя пользователя или E-Mail">
+          <Form.Item label="Enter user name or email">
             <Select
               value={inputValue}
               onSearch={onSearch}
@@ -86,13 +86,13 @@ const Sidebar = ({
               defaultActiveFirstOption={false}
               showArrow={false}
               filterOption={false}
-              placeholder="Введите имя пользователя или почту"
+              placeholder="Enter user name or email"
               showSearch>
               {options}
             </Select>
           </Form.Item>
           {selectedUserId && (
-            <Form.Item label="Введите текст сообщения">
+            <Form.Item label="Enter message">
               <TextArea
                 autosize={{ minRows: 3, maxRows: 10 }}
                 onChange={onChangeTextArea}

@@ -32,15 +32,15 @@ export default withFormik({
       .catch(err => {
         if (get(err, 'response.data.message.errmsg', '').indexOf('dup') >= 0) {
           openNotification({
-            title: 'Ошибка',
-            text: 'Аккаунт с такой почтой уже создан.',
+            title: 'Error',
+            text: 'Account with this email already exists.',
             type: 'error',
             duration: 5000
           });
         } else {
           openNotification({
-            title: 'Ошибка',
-            text: 'Возникла серверная ошибка при регистрации. Повторите позже.',
+            title: 'Error',
+            text: 'Server error during sign up. Try later.',
             type: 'error',
             duration: 5000
           });
