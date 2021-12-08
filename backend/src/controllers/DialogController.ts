@@ -29,7 +29,7 @@ class DialogController {
       .exec(function (err, dialogs) {
         if (err) {
           return res.status(404).json({
-            message: 'Dialogs not found',
+            message: 'Chats not found',
           });
         }
 
@@ -64,7 +64,7 @@ class DialogController {
         if (dialog) {
           return res.status(403).json({
             status: 'error',
-            message: 'Suhc chat already exisits',
+            message: 'Such chat already exisits',
           });
         } else {
           const dialog = new DialogModel(postData);

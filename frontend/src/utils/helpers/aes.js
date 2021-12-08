@@ -61,6 +61,6 @@ export default {
             return null;
         }
 
-        return dialog.author.publicECDHKey === publicKey ? dialog.partner : dialog  .author;
+        return dialog.author.publicECDHKey === publicKey ? dialog.partner : dialog.author;
     }
 } 
