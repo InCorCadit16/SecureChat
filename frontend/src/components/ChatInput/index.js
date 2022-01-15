@@ -69,7 +69,7 @@ const ChatInput = props => {
           )}
 
           <div className="chat-input__actions">
-            {/* <UploadField
+            {<UploadField
               onFiles={onSelectFiles}
               containerProps={{
                 className: "chat-input__actions-upload-btn"
@@ -80,26 +80,17 @@ const ChatInput = props => {
               }}
             >
               <Button type="link" shape="circle" icon="camera" />
-            </UploadField> */}
-            {isLoading ? (
+            </UploadField> }
+            { isLoading ? (
               <Button type="link" shape="circle" icon="loading" />
-            )  : /* isRecording || value || attachments.length ? */ (
+            )  : isRecording || value || attachments.length ? (
               <Button
                 onClick={sendMessage}
                 type="link"
                 shape="circle"
                 icon="check-circle"
               />
-            ) /* : (
-              <div className="chat-input__record-btn">
-                <Button
-                  onClick={onRecord}
-                  type="link"
-                  shape="circle"
-                  icon="audio"
-                />
-              </div>
-            ) */} 
+            ) : <div></div>} 
           </div>
         </div>
         {attachments.length > 0 && (
