@@ -148,7 +148,7 @@
     "sass": "^1.45.2"
   },
   "engines": {
-    "node": "12.2"
+    "node": "14.2"
   },
   "proxy": "http://localhost:3003"
 }
