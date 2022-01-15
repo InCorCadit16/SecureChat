@@ -78,7 +78,7 @@
   "scripts": {
     "start-client": "node scripts/start.js",
     "start": "cd ../backend && npm start",
-    "build": "node scripts/build.js",
+    "build": "node scripts/build.js && (cd ../backend && yarn install)",
     "test": "node scripts/test.js"
   },
   "eslintConfig": {

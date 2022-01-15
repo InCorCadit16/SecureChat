@@ -1,0 +1,24 @@
+{
+    "name": "secure-chat",
+    "version": "0.0.1",
+    "scripts": {
+        "start-client": "node frontend/scripts/start.js",
+        "build": "node frontend/scripts/build.js && (cd backend && yarn install)",
+        "start": "cd backend && npm start"
+    },
+    "eslintConfig": {
+        "extends": "react-app"
+    },
+    "browserslist": {
+        "production": [
+            ">0.2%",
+            "not dead",
+            "not op_mini all"
+        ],
+        "development": [
+            "last 1 chrome version",
+            "last 1 firefox version",
+            "last 1 safari version"
+        ]
+    }
+}
