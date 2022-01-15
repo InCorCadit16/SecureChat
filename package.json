@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "scripts": {
         "start-client": "cd frontend && node scripts/start.js",
-        "build": "(cd frontend && node scripts/build.js) && (cd ../backend && yarn install)",
+        "build": "(cd frontend && npm install && node scripts/build.js) && (cd ../backend && yarn install)",
         "test": "cd frontend && node scripts/test.js",
         "start": "cd backend && npm start"
     },
