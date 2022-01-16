@@ -77,7 +77,7 @@
   },
   "scripts": {
     "start-client": "node scripts/start.js",
-    "start": "(node scripts/start.js &) && (cd backend && npm start &)",
+    "start": "cd backend && npm start",
     "build": "node scripts/build.js && (cd backend && yarn install)",
     "test": "node scripts/test.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install npm && npm install yarn && npm run build"
