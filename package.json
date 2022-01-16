@@ -150,5 +150,5 @@
   "engines": {
     "node": "14.2"
   },
-  "proxy": "http://localhost:3003"
+  "proxy": "http://104.236.114.62:3003"
 }
