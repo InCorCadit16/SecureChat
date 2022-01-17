@@ -43,9 +43,10 @@ Other technologies used:
 Steps to run application:
 1) Run ```npm install``` or ```yarn install```
 3) Create .env file using ```cp .env.example .env``` command
-4) Register to [mailtrap.io](https://mailtrap.io/) and insert your account data into .env
-5) Register to [cloudinary.com](https://cloudinary.com/), open Dashboard in cloudinary and insert your account data into .env
-6) Run ```npm start```
+4) Install MongoDB or create a cluster on [MongoDB Cloud](https://cloud.mongodb.com) and insert your connection string in ```backend/src/core/db.ts```
+5) Register to [mailtrap.io](https://mailtrap.io/) and insert your account data into .env
+6) Register to [cloudinary.com](https://cloudinary.com/), open Dashboard in cloudinary and insert your account data into .env
+7) Run ```npm start```
 
 ### Database
 MongoDB database can be hosted either on MongoDB Atlas Cluster (first cluster is free) or locally. In order to connect database to backend open 
