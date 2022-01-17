@@ -5,6 +5,7 @@ import isToday from 'date-fns/is_today';
 import { Link } from 'react-router-dom';
 
 import { IconReaded, Avatar } from '../';
+import { isLoggedUser } from '../../utils/helpers';
 
 const getMessageTime = createdAt => {
   if (isToday(createdAt)) {
@@ -32,6 +33,7 @@ const DialogItem = ({
   text,
   isMe,
   currentDialogId,
+  author,
   partner,
   lastMessage,
   userId,
@@ -39,15 +41,15 @@ const DialogItem = ({
   <Link to={`/dialog/${_id}`}>
     <div
       className={classNames('dialogs__item', {
-        'dialogs__item--online': partner.isOnline,
+        'dialogs__item--online': (isLoggedUser(author) ? partner.fullname : author.fullname).isOnline,
         'dialogs__item--selected': currentDialogId === _id,
       })}>
       <div className="dialogs__item-avatar">
-        <Avatar user={partner} />
+        <Avatar user={(isLoggedUser(author) ? partner : author)} />
       </div>
       <div className="dialogs__item-info">
         <div className="dialogs__item-info-top">
-          <b>{partner.fullname}</b>
+          <b>{(isLoggedUser(author) ? partner.fullname : author.fullname)}</b>
           <span>{getMessageTime(lastMessage.createdAt)}</span>
         </div>
         <div className="dialogs__item-info-bottom">
